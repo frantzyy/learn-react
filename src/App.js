@@ -8,6 +8,7 @@ import Widget from './components/Widget';
 import Heart from './components/Heart';
 import Stateless from './components/Stateless';
 import Title from './components/Title';
+import Textarea from './components/Textarea';
 
 // original component from create-react-app
 // class App extends Component {
@@ -38,14 +39,13 @@ class App extends Component {
     super();
     this.state = {
       txt: 'this is the state text',
-      currentEvent : '---'
     };
     this.update = this.update.bind(this);
   }
 
   update(event){
     this.setState({txt: event.target.value})
-    this.setState({currentEvent: event.type})
+
   }
 
 
@@ -62,19 +62,7 @@ class App extends Component {
           <p>State.txt: {this.state.txt}</p>
           < Widget update={this.update.bind(this)} />
           <Button>I <Heart/> Surfing</Button> 
-          <div> 
-            <textarea 
-              onKeyPress={this.update}  
-              onCopy={this.update}  
-              onPaste={this.update} 
-              onFocus={this.update}
-              onBlur={this.update}
-              onDoubleClick={this.update}
-              //plus touch events if you want
-              cols="30" 
-              rows="10"/>
-            <h1>{this.state.currentEvent}</h1> 
-          </div>      
+          <Textarea />
         </div>
        );
     }
