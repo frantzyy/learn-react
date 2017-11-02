@@ -37,14 +37,17 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-      txt: 'this is the state text'
-    }
+      txt: 'this is the state text',
+      currentEvent : '---'
+    };
+    this.update = this.update.bind(this);
   }
 
   update(event){
     this.setState({txt: event.target.value})
-
+    this.setState({currentEvent: event.type})
   }
+
 
     render() {
       let txt = this.props.txt
@@ -58,7 +61,20 @@ class App extends Component {
           <input type="text" onChange={this.update.bind(this)} />
           <p>State.txt: {this.state.txt}</p>
           < Widget update={this.update.bind(this)} />
-          <Button>I <Heart/> Surfing</Button>         
+          <Button>I <Heart/> Surfing</Button> 
+          <div> 
+            <textarea 
+              onKeyPress={this.update}  
+              onCopy={this.update}  
+              onPaste={this.update} 
+              onFocus={this.update}
+              onBlur={this.update}
+              onDoubleClick={this.update}
+              //plus touch events if you want
+              cols="30" 
+              rows="10"/>
+            <h1>{this.state.currentEvent}</h1> 
+          </div>      
         </div>
        );
     }
