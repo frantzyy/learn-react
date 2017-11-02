@@ -30,6 +30,18 @@ import './App.css';
 // class component
 class App extends Component {
 
+  constructor(){
+    super();
+    this.state = {
+      txt: 'this is the state text'
+    }
+  }
+
+  update(event){
+    this.setState({txt: event.target.value})
+
+  }
+
     render() {
       let txt = this.props.txt
 
@@ -37,6 +49,8 @@ class App extends Component {
         <div>
           <h1>Hello World Chris! from Class Component</h1>
           <p>{txt}</p>
+          <input type="text" onChange={this.update.bind(this)} />
+          <p>{this.state.txt}</p>
         </div>
        );
     }
