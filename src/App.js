@@ -50,7 +50,8 @@ class App extends Component {
           <h1>Hello World Chris! from Class Component</h1>
           <p>{txt}</p>
           <input type="text" onChange={this.update.bind(this)} />
-          <p>{this.state.txt}</p>
+          <p>State.txt: {this.state.txt}</p>
+          < Widget update={this.update.bind(this)} />
         </div>
        );
     }
@@ -67,5 +68,9 @@ App.defaultProps = {
 
 // stateless function component
 // const App = () => <h1>Hello World Chris! from Stateless Function Component</h1>
+
+
+const Widget = (props) =>
+  <p><label>This is a widget: </label><input type="text" onChange={props.update} /></p>
 
 export default App
