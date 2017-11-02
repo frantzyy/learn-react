@@ -50,14 +50,14 @@ class App extends Component {
 
       return (
         <div>
+          <Title text="whoohoo!"/>
           <h1>Hello World Chris! from Class Component</h1>
           <Stateless />
           <p>{txt}</p>
           <input type="text" onChange={this.update.bind(this)} />
           <p>State.txt: {this.state.txt}</p>
           < Widget update={this.update.bind(this)} />
-          <Button>I <Heart/> Surfing</Button>
-          
+          <Button>I <Heart/> Surfing</Button>         
         </div>
        );
     }
@@ -72,6 +72,22 @@ App.defaultProps = {
   txt : 'this is the default txt'
 }
 
+const Title = (props) => 
+  <h1>Title: {props.text}</h1>
 
+Title.propTypes = {
+  // text : PropTypes.string.isRequired
+
+  //custom validation
+  text(props, propName, component) {
+    if(!(propName in props) ){
+      return new Error('missing ${propName}')
+    }
+
+    if(props[propName].length < 6 ){
+      return new Error('to short ${propName}')
+    }
+  }
+}
 
 export default App
