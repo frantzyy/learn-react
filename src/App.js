@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 
 import logo from './logo.svg';
 import './App.css';
-
+import Button from './components/Button';
+import Widget from './components/Widget';
+import Heart from './components/Heart';
+import Stateless from './components/Stateless';
 
 // original component from create-react-app
 // class App extends Component {
@@ -48,12 +51,13 @@ class App extends Component {
       return (
         <div>
           <h1>Hello World Chris! from Class Component</h1>
+          <Stateless />
           <p>{txt}</p>
           <input type="text" onChange={this.update.bind(this)} />
           <p>State.txt: {this.state.txt}</p>
           < Widget update={this.update.bind(this)} />
           <Button>I <Heart/> Surfing</Button>
-
+          
         </div>
        );
     }
@@ -68,20 +72,6 @@ App.defaultProps = {
   txt : 'this is the default txt'
 }
 
-// stateless function component
-// const App = () => <h1>Hello World Chris! from Stateless Function Component</h1>
 
-
-const Button = (props) => 
-  <button>{props.children}</button>
-
-const Widget = (props) =>
-  <p><label>This is a widget: </label><input type="text" onChange={props.update} /></p>
-
-class Heart extends Component {
-  render(){
-    return <span>&hearts;</span>
-  }
-}
 
 export default App
