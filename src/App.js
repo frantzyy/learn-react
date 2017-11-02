@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 import logo from './logo.svg';
@@ -39,13 +40,22 @@ class App extends Component {
     super();
     this.state = {
       txt: 'this is the state text',
+      a : '',
+      b : '',
+      c : '',
+      d : ''
     };
     this.update = this.update.bind(this);
   }
 
   update(event){
-    this.setState({txt: event.target.value})
-
+    this.setState({
+        txt: event.target.value,
+    a: this.refs.a.value, //basic way to use ref
+    b: this.b.value, //using a callback
+    c: ReactDOM.findDOMNode(this.c).value, //using component
+    d: this.d.refs.inputSpecial.value //using component with a ref, helpful when nodes are wrapped and you need access
+    }) 
   }
 
 
@@ -63,6 +73,29 @@ class App extends Component {
           < Widget update={this.update.bind(this)} />
           <Button>I <Heart/> Surfing</Button> 
           <Textarea />
+          <div>
+            <input 
+              ref="a" //basic way to use ref
+              type="text"
+              onChange={this.update.bind(this)} />
+            State.a: {this.state.a}
+            <hr/>
+            <input 
+              ref={node => this.b = node} //using a callback
+              type="text"
+              onChange={this.update.bind(this)} />
+            State.b: {this.state.b}
+            <hr/>
+            <InputSpecial
+              ref={component => this.c = component} //using a component
+              update={this.update.bind(this)} />
+            State.c: {this.state.c}
+            <hr/>
+            <InputSpecial
+              ref={component => this.d = component}  //using a component with a ref
+              update={this.update.bind(this)} />
+            State.d: {this.state.d}
+          </div>
         </div>
        );
     }
@@ -77,6 +110,11 @@ App.defaultProps = {
   txt : 'this is the default txt'
 }
 
+class InputSpecial extends Component {
+    render(){
+     return <input ref="inputSpecial" type="text" onChange={this.props.update} />
+    }
+}
 
 
 export default App
