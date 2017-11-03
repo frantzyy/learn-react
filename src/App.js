@@ -10,6 +10,7 @@ import Heart from './components/Heart';
 import Stateless from './components/Stateless';
 import Title from './components/Title';
 import Textarea from './components/Textarea';
+import Inputs from './components/Inputs';
 
 // original component from create-react-app
 // class App extends Component {
@@ -39,22 +40,15 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-      txt: 'this is the state text',
-      a : '',
-      b : '',
-      c : '',
-      d : ''
+      txt: 'this is the state text'
+     
     };
     this.update = this.update.bind(this);
   }
 
   update(event){
     this.setState({
-        txt: event.target.value,
-    a: this.refs.a.value, //basic way to use ref
-    b: this.b.value, //using a callback
-    c: ReactDOM.findDOMNode(this.c).value, //using component
-    d: this.d.refs.inputSpecial.value //using component with a ref, helpful when nodes are wrapped and you need access
+        txt: event.target.value
     }) 
   }
 
@@ -73,29 +67,8 @@ class App extends Component {
           < Widget update={this.update.bind(this)} />
           <Button>I <Heart/> Surfing</Button> 
           <Textarea />
-          <div>
-            <input 
-              ref="a" //basic way to use ref
-              type="text"
-              onChange={this.update.bind(this)} />
-            State.a: {this.state.a}
-            <hr/>
-            <input 
-              ref={node => this.b = node} //using a callback
-              type="text"
-              onChange={this.update.bind(this)} />
-            State.b: {this.state.b}
-            <hr/>
-            <InputSpecial
-              ref={component => this.c = component} //using a component
-              update={this.update.bind(this)} />
-            State.c: {this.state.c}
-            <hr/>
-            <InputSpecial
-              ref={component => this.d = component}  //using a component with a ref
-              update={this.update.bind(this)} />
-            State.d: {this.state.d}
-          </div>
+          <Inputs />
+         
         </div>
        );
     }
@@ -110,11 +83,6 @@ App.defaultProps = {
   txt : 'this is the default txt'
 }
 
-class InputSpecial extends Component {
-    render(){
-     return <input ref="inputSpecial" type="text" onChange={this.props.update} />
-    }
-}
 
 
 export default App
