@@ -12,7 +12,7 @@ import Title from './components/Title';
 import Textarea from './components/Textarea';
 import Inputs from './components/Inputs';
 import Starwars from './components/Starwars';
-
+import HigherOrder from './components/HigherOrder';
 // original component from create-react-app class App extends Component {
 // render() {     let txt = this.props.txt     return (       <div
 // className="App">         <header className="App-header">           <img
@@ -113,56 +113,14 @@ class App extends Component {
           .updateAndRender
           .bind(this)}>Learning about more life cycle hooks (every 5 clicks it renders): {this.props.val}</button>
         <br/>
-          <Starwars />
-        <div>
-          <ButtonHOC>button</ButtonHOC>
-          <hr />
-          <LabelHOC>label</LabelHOC>  
-        </div>
+        <Starwars />
+        <br/>
+        <HigherOrder />
       </div>
       
     );
   }
 }
-
-const HOC = (InnerComponent) => class extends Component {
-  constructor(){
-    super();
-    this.state = {count: 0}
-  }
-  componentWillMount(){
-    console.log('will mount')
-  }
-
-  update(){
-    this.setState({count: this.state.count + 1})
-  }
-  
-  render(){
-    return(
-      <InnerComponent 
-        {...this.props}
-        {...this.state}
-        update={this.update.bind(this)}
-     />
-    )
-  }
-}
-const ButtonHOC = HOC((props) => <button onClick={props.update}>{props.children}- {props.count}</button>)
-
-class Label extends React.Component {
-  componentWillMount(){
-    console.log('label will mount')
-  }
-
-  render(){
-    return (
-      <label onMouseMove={this.props.update}>{this.props.children} - {this.props.count}</label>
-    )
-  }
-}
-
-const LabelHOC = HOC(Label)
 
 App.propTypes = {
   txt: PropTypes.string,
