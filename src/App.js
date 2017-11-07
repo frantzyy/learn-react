@@ -42,7 +42,8 @@ class App extends Component {
     this.state = {
       txt: 'this is the state text',
       val: 0,
-      increasing : false
+      increasing : false,
+      items : []
      
     };
     this.update = this.update.bind(this);
@@ -62,11 +63,34 @@ class App extends Component {
   componentWillMount(){
     console.log('componentWillMount');
     // this.setState({m: 2}) //intercept state before render
-  }
+
+    // //attempt 1
+    // fetch('http://swapi.co/api/people/?format=json')
+    // .then( response => response.json())
+    // .then( ({results: items }) => this.setState({items}) )
+
+    //  //attempt 2
+    // fetch('http://swapi.co/api/people/?format=json', 
+    // {
+    //   method: 'GET' ,
+    //   mode: 'no-cors'
+    // })
+    // .then(function(response) {
+    //   console.log(response);
+    //   var contentType = response.headers.get("content-type");
+    //   if(contentType && contentType.includes("application/json")) {
+    //     return response.json();
+    //   }
+    //   throw new TypeError("Oops, we haven't got JSON!");
+    // })
+    // .then( ({results: items }) => this.setState({items}) )
+    // }
+}
 
   componentDidMount(){
     console.log('componentDidMount');
     // this.inc = setInterval(this.update, 500)
+    
   }
 
   componentWillUnmount(){
@@ -91,7 +115,8 @@ class App extends Component {
       console.log('render');
       console.log('this.state.increasing: ' + this.state.increasing );
 
-      let txt = this.props.txt
+      let txt = this.props.txt;
+      let items = this.state.items;
 
       return (
         <div>
@@ -109,6 +134,7 @@ class App extends Component {
          <button onClick={this.update}>Learning about life cycle hooks: {this.state.val * this.state.m}</button>
          <br />
          <button onClick={this.updateAndRender.bind(this)}>Learning about more life cycle hooks: {this.props.val}</button>
+          {items.map(item =><h4 key={item.name}>{item.name}</h4>)}
         </div>
        );
     }

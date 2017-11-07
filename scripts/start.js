@@ -64,7 +64,18 @@ choosePort(HOST, DEFAULT_PORT)
       proxyConfig,
       urls.lanUrlForConfig
     );
+    
+//TODO: trying to get CORS enabled
+    // serverConfig.headers = {
+    //   'Access-Control-Allow-Origin': '*',
+    //   'Access-Control-Allow-Headers' : 'Origin, X-Requested-With, Content-Type, Accept'
+    // };
+
+    console.log(serverConfig);
+
     const devServer = new WebpackDevServer(compiler, serverConfig);
+
+
     // Launch WebpackDevServer.
     devServer.listen(port, HOST, err => {
       if (err) {
