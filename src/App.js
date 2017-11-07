@@ -40,7 +40,8 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-      txt: 'this is the state text'
+      txt: 'this is the state text',
+      val: 0
      
     };
     this.update = this.update.bind(this);
@@ -48,12 +49,29 @@ class App extends Component {
 
   update(event){
     this.setState({
-        txt: event.target.value
+        // txt: event.target.value,
+        val: this.state.val + 1
     }) 
   }
 
+  componentWillMount(){
+    console.log('componentWillMount');
+    // this.setState({m: 2}) //intercept state before render
+  }
+
+  componentDidMount(){
+    console.log('componentDidMount');
+    // this.inc = setInterval(this.update, 500)
+  }
+
+  componentWillUnmount(){
+    console.log('componentWillUnmount');
+    // clearInterval(this.inc)
+  }
 
     render() {
+      console.log('render');
+
       let txt = this.props.txt
 
       return (
@@ -68,7 +86,7 @@ class App extends Component {
           <Button>I <Heart/> Surfing</Button> 
           <Textarea />
           <Inputs />
-         
+         <button onClick={this.update}>{this.state.val * this.state.m}</button>
         </div>
        );
     }
@@ -76,13 +94,33 @@ class App extends Component {
 
 App.propTypes = {
   txt:  PropTypes.string,
-  cat: PropTypes.number.isRequired
+  // cat: PropTypes.number.isRequired
 }
 
 App.defaultProps = {
   txt : 'this is the default txt'
 }
 
+class Wrapper extends Component{
+  mount(){
+    ReactDOM.render(<App />, document.getElementById('a'))
+  }
+
+  unmount(){
+    ReactDOM.unmountComponentAtNode(document.getElementById('a'))
+  }
+
+  render(){
+    return (
+      <div>
+          <button onClick={this.mount.bind(this)}>Mount</button>
+          <button onClick={this.unmount.bind(this)}>UnMount</button>
+          <div id="a"></div>
+      </div>
+    )
+  }
+}
 
 
-export default App
+
+export default Wrapper
