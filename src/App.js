@@ -11,6 +11,7 @@ import Stateless from './components/Stateless';
 import Title from './components/Title';
 import Textarea from './components/Textarea';
 import Inputs from './components/Inputs';
+import Starwars from './components/Starwars';
 
 // original component from create-react-app class App extends Component {
 // render() {     let txt = this.props.txt     return (       <div
@@ -27,8 +28,7 @@ class App extends Component {
     this.state = {
       txt: 'this is the state text',
       val: 0,
-      increasing: false,
-      items: []
+      increasing: false
 
     };
     this.update = this
@@ -51,10 +51,6 @@ class App extends Component {
   componentWillMount() {
     console.log('componentWillMount');
     // this.setState({m: 2}) //intercept state before render
-
-    fetch('https://swapi.co/api/people/?format=json').then(response => response.json())
-    // .then(response => response.results)
-      .then(({results: items}) => this.setState({items}))
 
   }
 
@@ -84,19 +80,13 @@ class App extends Component {
     console.log('prevProps: ' + prevProps.val);
   }
 
-  filter(e) {
-    this.setState({filter: e.target.value})
-  }
+  
   render() {
     console.log('render');
     console.log('this.state.increasing: ' + this.state.increasing);
 
     let txt = this.props.txt;
-    let items = this.state.items;
 
-    if (this.state.filter) {
-      items = items.filter(item => item.name.toLowerCase().includes(this.state.filter.toLowerCase()))
-    }
 
     return (
       <div>
@@ -123,32 +113,7 @@ class App extends Component {
           .updateAndRender
           .bind(this)}>Learning about more life cycle hooks (every 5 clicks it renders): {this.props.val}</button>
         <br/>
-        Filter starwars peeps:
-        <input type="text" onChange={this
-          .filter
-          .bind(this)}/>
-        <br/>
-        <table>
-          <tr>
-            <td>
-              <p>Using the no component:</p>
-              {items.map(item =><h4 key = {
-                item.name
-              } > {
-                item.name
-              } </h4>)}
-            </td>
-            <td>
-              <p>Using the Person component:</p>
-              {items.map(item =>< Person key = {
-                item.name
-              }
-              person = {
-                item
-              } />)}
-            </td>
-          </tr>
-        </table>
+          <Starwars />
       </div>
     );
   }
@@ -189,6 +154,6 @@ class Wrapper extends Component {
   }
 }
 
-const Person = (props) => <h4>{props.person.name}</h4>
+
 
 export default Wrapper
