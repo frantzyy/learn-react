@@ -133,6 +133,12 @@ App.defaultProps = {
 }
 
 class Wrapper extends Component {
+  componentDidMount() {
+    console.log('wrappercomponentWillMount');
+    this.mount();
+
+  }
+  
   mount() {
     ReactDOM.render(
       <App/>, document.getElementById('a'))
