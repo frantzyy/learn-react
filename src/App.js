@@ -65,26 +65,12 @@ class App extends Component {
     // this.setState({m: 2}) //intercept state before render
 
     // //attempt 1
-    // fetch('http://swapi.co/api/people/?format=json')
-    // .then( response => response.json())
-    // .then( ({results: items }) => this.setState({items}) )
+    fetch('https://swapi.co/api/people/?format=json')
+    .then( response => response.json())
+    // .then(response => response.results)
+    .then( ({results: items }) => this.setState({items}) )
 
-    //  //attempt 2
-    // fetch('http://swapi.co/api/people/?format=json', 
-    // {
-    //   method: 'GET' ,
-    //   mode: 'no-cors'
-    // })
-    // .then(function(response) {
-    //   console.log(response);
-    //   var contentType = response.headers.get("content-type");
-    //   if(contentType && contentType.includes("application/json")) {
-    //     return response.json();
-    //   }
-    //   throw new TypeError("Oops, we haven't got JSON!");
-    // })
-    // .then( ({results: items }) => this.setState({items}) )
-    // }
+
 }
 
   componentDidMount(){
