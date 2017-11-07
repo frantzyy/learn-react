@@ -41,7 +41,8 @@ class App extends Component {
     super();
     this.state = {
       txt: 'this is the state text',
-      val: 0
+      val: 0,
+      increasing : false
      
     };
     this.update = this.update.bind(this);
@@ -52,6 +53,10 @@ class App extends Component {
         // txt: event.target.value,
         val: this.state.val + 1
     }) 
+  }
+
+  updateAndRender(event){
+    ReactDOM.render(<App val={this.props.val + 1}/>, document.getElementById('a'))
   }
 
   componentWillMount(){
@@ -69,8 +74,22 @@ class App extends Component {
     // clearInterval(this.inc)
   }
 
+  componentWillReceiveProps(nextProps){
+    this.setState({increasing : nextProps.val > this.props.val})
+  }
+
+// state will still be updated but will not render until this returns true
+  shouldComponentUpdate(nextProps, nextState){
+    return nextProps.val % 5 === 0;
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    console.log('prevProps: ' + prevProps.val);
+  }
+
     render() {
       console.log('render');
+      console.log('this.state.increasing: ' + this.state.increasing );
 
       let txt = this.props.txt
 
@@ -86,7 +105,10 @@ class App extends Component {
           <Button>I <Heart/> Surfing</Button> 
           <Textarea />
           <Inputs />
-         <button onClick={this.update}>{this.state.val * this.state.m}</button>
+          <br />
+         <button onClick={this.update}>Learning about life cycle hooks: {this.state.val * this.state.m}</button>
+         <br />
+         <button onClick={this.updateAndRender.bind(this)}>Learning about more life cycle hooks: {this.props.val}</button>
         </div>
        );
     }
@@ -98,7 +120,8 @@ App.propTypes = {
 }
 
 App.defaultProps = {
-  txt : 'this is the default txt'
+  txt : 'this is the default txt',
+  val : 0
 }
 
 class Wrapper extends Component{
