@@ -15,7 +15,7 @@ import Starwars from './components/Starwars';
 import HigherOrder from './components/HigherOrder';
 import JsxCompiler from './components/JsxCompiler';
 import ParentChildren from './components/ParentChildren';
-
+import ButtonChildren from './components/ButtonChildren';
 
 // original component from create-react-app class App extends Component {
 // render() {     let txt = this.props.txt     return (       <div
@@ -124,6 +124,8 @@ class App extends Component {
         <JsxCompiler />
         <br/>
         <ParentChildren />
+        <br/>
+        <ButtonChildren />
       </div>
       
     );
