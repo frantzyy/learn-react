@@ -13,6 +13,8 @@ import Textarea from './components/Textarea';
 import Inputs from './components/Inputs';
 import Starwars from './components/Starwars';
 import HigherOrder from './components/HigherOrder';
+import JsxCompiler from './components/JsxCompiler';
+
 // original component from create-react-app class App extends Component {
 // render() {     let txt = this.props.txt     return (       <div
 // className="App">         <header className="App-header">           <img
@@ -116,6 +118,8 @@ class App extends Component {
         <Starwars />
         <br/>
         <HigherOrder />
+        <br/>
+        <JsxCompiler />
       </div>
       
     );
