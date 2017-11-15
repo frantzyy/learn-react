@@ -16,7 +16,7 @@ import HigherOrder from './components/HigherOrder';
 import JsxCompiler from './components/JsxCompiler';
 import ParentChildren from './components/ParentChildren';
 import ButtonChildren from './components/ButtonChildren';
-
+import Section from './components/Section';
 // original component from create-react-app class App extends Component {
 // render() {     let txt = this.props.txt     return (       <div
 // className="App">         <header className="App-header">           <img
@@ -126,6 +126,7 @@ class App extends Component {
         <ParentChildren />
         <br/>
         <ButtonChildren />
+        <Section />
       </div>
       
     );

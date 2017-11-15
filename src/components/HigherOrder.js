@@ -5,6 +5,7 @@ class HigherOrder extends React.Component {
     render(){
         return(
             <div>
+                <p>Higher Order component example...........</p>
                 <ButtonHOC>button</ButtonHOC>
                  <hr />
                  <LabelHOC>label</LabelHOC>  
